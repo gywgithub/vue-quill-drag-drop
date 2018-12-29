@@ -88,7 +88,7 @@ export default {
     return {
       type: null,
       base64: null,
-      content: '',
+      content: 'abc',
       editorOption: {},
       dropData: 'text drop',
       quill: null,
@@ -134,8 +134,15 @@ export default {
     })
     this.quill.root.addEventListener('drop', this.handleDrop, false)
     this.quill.root.addEventListener('dragover', this.handleDragover, false)
+    // function handler () {
+    //   console.log('3434')
+    // }
+    // this.quill.on('text-change', handler)
   },
   methods: {
+    onEditorBlur () {
+      console.log(1)
+    },
     dragend (event) {
       event.dataTransfer.clearData()
     },
