@@ -135,7 +135,7 @@ export default {
     this.quill.root.addEventListener('drop', this.handleDrop, false)
     this.quill.root.addEventListener('dragover', this.handleDragover, false)
     // function handler () {
-    //   console.log('3434')
+    //   console.log('text-change')
     // }
     // this.quill.on('text-change', handler)
   },
