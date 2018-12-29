@@ -60,6 +60,8 @@ import hljs from 'highlightjs'
 import Quill from 'quill'
 import 'highlightjs/styles/monokai-sublime.css'
 import 'quill/dist/quill.snow.css'
+import { ImageDrop } from 'quill-image-drop-module'
+console.log(ImageDrop)
 hljs.configure({
   languages: ['javascript', 'ruby', 'python']
 })
@@ -71,16 +73,19 @@ export default {
     }
   },
   mounted () {
+    Quill.register('modules/imageDrop', ImageDrop)
     this.quill = new Quill('#editor', {
       modules: {
         syntax: {
           highlight: text => hljs.highlightAuto(text).value
         },
-        toolbar: '#toolbar-container'
+        toolbar: '#toolbar-container',
+        imageDrop: true
       },
       placeholder: 'Compose an epic...',
       theme: 'snow'
     })
+    console.log(this.quill)
   },
   methods: {
     getContent () {
