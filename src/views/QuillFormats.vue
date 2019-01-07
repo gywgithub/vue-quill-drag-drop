@@ -2,9 +2,14 @@
   <div>
     <br>
     <span class="md-display-1">Quill Formats</span>
-    <br><br>
+    <br>
+    <br>
     <md-button @click.native="getContent">getContent</md-button>&nbsp;&nbsp;&nbsp;&nbsp;
-    <md-button @click.native="setContent">setContent</md-button><br><br>
+    <md-button @click.native="setContent">setContent</md-button>&nbsp;&nbsp;&nbsp;&nbsp;
+    <md-button @click.native="download">Download-HTML</md-button>&nbsp;&nbsp;&nbsp;&nbsp;
+    <md-button @click.native="exportDoc">Export-Doc</md-button>&nbsp;&nbsp;&nbsp;&nbsp;
+    <br>
+    <br>
     <div class="container">
       <div id="toolbar-container">
         <span class="ql-formats">
@@ -61,7 +66,6 @@ import Quill from 'quill'
 import 'highlightjs/styles/monokai-sublime.css'
 import 'quill/dist/quill.snow.css'
 import { ImageDrop } from 'quill-image-drop-module'
-console.log(ImageDrop)
 hljs.configure({
   languages: ['javascript', 'ruby', 'python']
 })
@@ -85,9 +89,60 @@ export default {
       placeholder: 'Compose an epic...',
       theme: 'snow'
     })
-    console.log(this.quill)
+    this.outputHTML = this.quill.root.innerHTML
   },
   methods: {
+    exportDoc () {
+      let outputHTML = this.quill.root.innerHTML
+      this.export2File(outputHTML, '', 'doc')
+    },
+    export2File (outputHTML, fileName = '', fileType) {
+      let preHtml = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title></head><body>"
+      let postHtml = '</body></html>'
+
+      if (fileType === 'doc') {
+        let doc = new DOMParser().parseFromString(outputHTML, 'text/html').body
+        let imgList = doc.getElementsByTagName('img')
+
+        // 下面这个 newImgSrcList 需要程序动态生成,对应 imgList
+        let newImgSrcList = ['https://www.google.com.hk/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png', 'https://www.baidu.com/img/bd_logo1.png']
+
+        for (let index = 0; index < imgList.length; index++) {
+          if (newImgSrcList[index]) {
+            imgList[index].src = newImgSrcList[index]
+          }
+        }
+        outputHTML = doc.innerHTML
+      }
+
+      let html = preHtml + outputHTML + postHtml
+
+      let blob = new Blob(['\ufeff', html], {
+        type: 'application/msword'
+      })
+      let url = 'data:application/vnd.ms-wordcharset=utf-8,' + encodeURIComponent(html)
+
+      fileName = fileName ? fileName + '.' + fileType : 'document.' + fileType
+
+      let downloadLink = document.createElement('a')
+
+      document.body.appendChild(downloadLink)
+
+      if (navigator.msSaveOrOpenBlob) {
+        navigator.msSaveOrOpenBlob(blob, fileName) // IE10-11
+      } else {
+        downloadLink.href = url
+
+        downloadLink.download = fileName
+
+        downloadLink.click()
+      }
+      document.body.removeChild(downloadLink)
+    },
+    download () {
+      let outputHTML = this.quill.root.innerHTML
+      this.export2File(outputHTML, '', 'html')
+    },
     getContent () {
       let delta = this.quill.getContents()
       console.log(delta)
