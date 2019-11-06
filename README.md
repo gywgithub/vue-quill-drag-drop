@@ -2,9 +2,11 @@
 
 `vue`  `quill` `drag and drop`  `quill-image-drop-module`
 
-基于 quill 实现了不同类型数据拖拽到富文本输入框. 支持文本拖拽,图片拖拽,canvas 拖拽,表格,html等不同格式数据拖拽.
 
-效果如下:
+Based on quill, different types of data are dragged to the rich text input box. It supports text drag, picture drag, canvas drag, table, HTML and other data drag formats.
+
+
+#### Preview
 
 ![drag-drop](src/assets/images/drag-drop.gif)
 
