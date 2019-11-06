@@ -8,7 +8,7 @@ Based on quill, different types of data are dragged to the rich text input box. 
 
 #### Preview
 
-![drag-drop](src/assets/images/drag-drop.gif)
+![drag-drop](src/assets/images/preview-quill.gif)
 
 ## Project setup
 

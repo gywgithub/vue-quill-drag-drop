@@ -95,7 +95,7 @@ export default {
       optionList: [
         {
           xAxis: {
-            data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
+            data: ['abc', 'DEF', 'GHI', 'God', 'bbb', '111']
           },
           yAxis: {},
           series: [{
@@ -105,7 +105,7 @@ export default {
         },
         {
           xAxis: {
-            data: ['高跟鞋', '袜子']
+            data: ['God', '111']
           },
           yAxis: {},
           series: [{
