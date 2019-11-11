@@ -1,76 +1,81 @@
 <template>
-  <div class="display-flex">
-    <div class="div-size-left">
-      <div>
-        <div
-          v-for="(item, key) in optionList"
-          :key="key"
-          :id="'echarts' + key"
-          class="echarts-div"
-          draggable="true"
-          @dragstart="dragstart($event, 'echarts' + key, 'canvas')"
-          @dragend="dragend"
-        ></div>
-      </div>
-      <div class="div-drop-text" @drop="drop" @dragover.prevent>
-        <p>{{this.dropData}}</p>
-      </div>
-      <div
-        class="drag-div"
-        draggable="true"
-        @dragstart="dragstart($event, 'drag data', 'text')"
-        @dragend="dragend"
-      >
-        <p>drag div</p>
-      </div>
-      <img
-        id="img"
-        src="../assets/images/1.jpg"
-        alt="image"
-        draggable="true"
-        @dragstart="dragstart($event, 'image data', 'image')"
-      >
-      <canvas id="canvasHidden" v-show="false"></canvas>
-      <div class="clear"></div>
-      <br>
-      <div id="table" draggable="true" @dragstart="dragstart($event, 'html canvas', 'html')">
-        <md-table>
-          <md-table-row>
-            <md-table-head md-numeric>ID</md-table-head>
-            <md-table-head>Name</md-table-head>
-            <md-table-head>Email</md-table-head>
-            <md-table-head>Gender</md-table-head>
-            <md-table-head>Job Title</md-table-head>
-          </md-table-row>
-
-          <md-table-row>
-            <md-table-cell md-numeric>1</md-table-cell>
-            <md-table-cell>Shawna Dubbin</md-table-cell>
-            <md-table-cell>sdubbin0@geocities.com</md-table-cell>
-            <md-table-cell>Male</md-table-cell>
-            <md-table-cell>Assistant Media Planner</md-table-cell>
-          </md-table-row>
-
-          <md-table-row>
-            <md-table-cell md-numeric>2</md-table-cell>
-            <md-table-cell>Odette Demageard</md-table-cell>
-            <md-table-cell>odemageard1@spotify.com</md-table-cell>
-            <md-table-cell>Female</md-table-cell>
-            <md-table-cell>Account Coordinator</md-table-cell>
-          </md-table-row>
-        </md-table>
-      </div>
+  <div>
+    <div class="link-container">
+      <router-link to="/QuillFormats">Quill Formats</router-link>
     </div>
-    <div class="div-size-right">
-      <div class="quill-container">
-        <quill-editor
-          v-model="content"
-          :options="editorOption"
-          @blur="onEditorBlur($event)"
-          @focus="onEditorFocus($event)"
-          @change="onEditorChange($event)"
-          id="editor"
-        ></quill-editor>
+    <div class="display-flex">
+      <div class="div-size-left">
+        <div>
+          <div
+            v-for="(item, key) in optionList"
+            :key="key"
+            :id="'echarts' + key"
+            class="echarts-div"
+            draggable="true"
+            @dragstart="dragstart($event, 'echarts' + key, 'canvas')"
+            @dragend="dragend"
+          ></div>
+        </div>
+        <div class="div-drop-text" @drop="drop" @dragover.prevent>
+          <p>{{this.dropData}}</p>
+        </div>
+        <div
+          class="drag-div"
+          draggable="true"
+          @dragstart="dragstart($event, 'drag data', 'text')"
+          @dragend="dragend"
+        >
+          <p>drag div</p>
+        </div>
+        <img
+          id="img"
+          src="../assets/images/1.jpg"
+          alt="image"
+          draggable="true"
+          @dragstart="dragstart($event, 'image data', 'image')"
+        >
+        <canvas id="canvasHidden" v-show="false"></canvas>
+        <div class="clear"></div>
+        <br>
+        <div id="table" draggable="true" @dragstart="dragstart($event, 'html canvas', 'html')">
+          <md-table>
+            <md-table-row>
+              <md-table-head md-numeric>ID</md-table-head>
+              <md-table-head>Name</md-table-head>
+              <md-table-head>Email</md-table-head>
+              <md-table-head>Gender</md-table-head>
+              <md-table-head>Job Title</md-table-head>
+            </md-table-row>
+
+            <md-table-row>
+              <md-table-cell md-numeric>1</md-table-cell>
+              <md-table-cell>Shawna Dubbin</md-table-cell>
+              <md-table-cell>sdubbin0@geocities.com</md-table-cell>
+              <md-table-cell>Male</md-table-cell>
+              <md-table-cell>Assistant Media Planner</md-table-cell>
+            </md-table-row>
+
+            <md-table-row>
+              <md-table-cell md-numeric>2</md-table-cell>
+              <md-table-cell>Odette Demageard</md-table-cell>
+              <md-table-cell>odemageard1@spotify.com</md-table-cell>
+              <md-table-cell>Female</md-table-cell>
+              <md-table-cell>Account Coordinator</md-table-cell>
+            </md-table-row>
+          </md-table>
+        </div>
+      </div>
+      <div class="div-size-right">
+        <div class="quill-container">
+          <quill-editor
+            v-model="content"
+            :options="editorOption"
+            @blur="onEditorBlur($event)"
+            @focus="onEditorFocus($event)"
+            @change="onEditorChange($event)"
+            id="editor"
+          ></quill-editor>
+        </div>
       </div>
     </div>
   </div>
@@ -222,6 +227,11 @@ export default {
 }
 </script>
 <style scoped="true">
+.link-container {
+  font-size: 1.6em;
+  margin: 40px;
+}
+
 .display-flex {
   display: flex;
   height: 850px;
