@@ -8,6 +8,7 @@
     <md-button @click.native="setContent">setContent</md-button>&nbsp;&nbsp;&nbsp;&nbsp;
     <md-button @click.native="download">Download-HTML</md-button>&nbsp;&nbsp;&nbsp;&nbsp;
     <md-button @click.native="exportDoc">Export-Doc</md-button>&nbsp;&nbsp;&nbsp;&nbsp;
+    <md-button @click.native="imageBase64ToLink">ImageBase64ToLink</md-button>&nbsp;&nbsp;&nbsp;&nbsp;
     <br>
     <br>
     <div class="container">
@@ -139,13 +140,62 @@ export default {
       }
       document.body.removeChild(downloadLink)
     },
+    async imageBase64ToLink () {
+      let outputHTML = this.quill.root.innerHTML
+      console.log(typeof outputHTML)
+
+      let doc = new DOMParser().parseFromString(outputHTML, 'text/html').body
+      let imgList = doc.getElementsByTagName('img')
+      console.log(imgList)
+
+      for (let index = 0; index < imgList.length; index++) {
+        let imgUrl = imgList[index].src
+
+        let bytes = window.atob(imgUrl.split(',')[1])
+        let arrayBuffer = new ArrayBuffer(bytes.length)
+        let intArray = new Uint8Array(arrayBuffer)
+        for (let i = 0; i < bytes.length; i++) {
+          intArray[i] = bytes.charCodeAt(i)
+        }
+        let blob = new Blob([intArray], { type: 'image/png' })
+        console.log('blob: ', blob)
+        let fileName = new Date().getTime() + '.png'
+        let file = new window.File([blob], fileName, { type: 'image/png' })
+        console.log('file ', file)
+
+        // upload file
+        let formData = new FormData()
+        formData.append('file', file)
+        // File Server -> https://github.com/gywgithub/FileServer
+        await fetch('http://127.0.0.1:3000/file_upload', {
+          method: 'POST',
+          body: formData
+        }).then(res => {
+          let imageSrcLink = 'http://127.0.0.1:3000/images/' + fileName
+          console.log(imageSrcLink)
+          imgList[index].src = imageSrcLink
+          console.log('imgList: ', imgList)
+          return res.json()
+        }).then(result => {
+          console.log('result: ', result)
+          return true
+        }).catch(err => {
+          console.error('err: ', err)
+        })
+      }
+
+      console.log(doc)
+      let innerHTML = doc.innerHTML
+      console.log('innerHTML: ', innerHTML)
+    },
     download () {
       let outputHTML = this.quill.root.innerHTML
+      console.log('outputHTML: ', outputHTML)
       this.export2File(outputHTML, '', 'html')
     },
     getContent () {
       let delta = this.quill.getContents()
-      console.log(delta)
+      console.log('content: ', delta)
     },
     setContent () {
       this.quill.setContents([])
