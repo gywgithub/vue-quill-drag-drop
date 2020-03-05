@@ -252,7 +252,7 @@ export default {
   float: left;
 }
 .echarts-div {
-  width: 300px;
+  width: 300px !important;
   height: 260px;
   float: left;
 }
