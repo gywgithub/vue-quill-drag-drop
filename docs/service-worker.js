@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/vue-quill-drag-drop/precache-manifest.22b5344db53385c93683779c6bc5bf73.js"
+  "/vue-quill-drag-drop/precache-manifest.0dcec71b391d2bffb4403c7c1260276c.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "vue-quill-drag-drop"});
