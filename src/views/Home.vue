@@ -5,17 +5,15 @@
     </div>
     <div class="display-flex">
       <div class="div-size-left">
-        <div>
-          <div
-            v-for="(item, key) in optionList"
-            :key="key"
-            :id="'echarts' + key"
-            class="echarts-div"
-            draggable="true"
-            @dragstart="dragstart($event, 'echarts' + key, 'canvas')"
-            @dragend="dragend"
-          ></div>
-        </div>
+        <div
+          v-for="(item, key) in optionList"
+          :key="key"
+          :id="'echarts' + key"
+          class="echarts-div"
+          draggable="true"
+          @dragstart="dragstart($event, 'echarts' + key, 'canvas')"
+          @dragend="dragend"
+        ></div>
         <div class="div-drop-text" @drop="drop" @dragover.prevent>
           <p>{{this.dropData}}</p>
         </div>
@@ -231,18 +229,16 @@ export default {
   font-size: 1.6em;
   margin: 40px;
 }
-
 .display-flex {
   display: flex;
   height: 850px;
 }
-
 .div-size-left {
-  width: 50%;
+  width: 60%;
   margin: 10px;
 }
 .div-size-right {
-  width: 50%;
+  width: 40%;
   margin: 10px;
 }
 .quill-container {
@@ -256,8 +252,8 @@ export default {
   float: left;
 }
 .echarts-div {
-  width: 400px;
-  height: 320px;
+  width: 300px;
+  height: 260px;
   float: left;
 }
 .drag-div {
@@ -265,7 +261,7 @@ export default {
   height: 200px;
   width: 150px;
   float: left;
-  margin-left: 200px;
+  margin-left: 100px;
 }
 .clear {
   clear: both;

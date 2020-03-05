@@ -141,11 +141,30 @@ export default {
     },
     download () {
       let outputHTML = this.quill.root.innerHTML
+      console.log(typeof outputHTML)
+
+      let doc = new DOMParser().parseFromString(outputHTML, 'text/html').body
+      let imgs = doc.getElementsByTagName('img')
+      // console.log(imgs)
+      // 下面这个 newImgSrcList 需要程序动态生成,对应 imgList
+      // let newImgSrcList = ['https://www.google.com.hk/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png', 'https://www.baidu.com/img/bd_logo1.png']
+
+      // for (let index = 0; index < imgList.length; index++) {
+      //   if (newImgSrcList[index]) {
+      //     imgList[index].src = newImgSrcList[index]
+      //   }
+      // }
+
+      // let imgs = outputHTML.getElementsByTagName('img')
+      // let imgs = outputHTML.getElementsByTagNameNS('http://www.w3.org/1999/xhtml', 'img')
+
+      console.log(imgs)
+      console.log('outputHTML: ', outputHTML)
       this.export2File(outputHTML, '', 'html')
     },
     getContent () {
       let delta = this.quill.getContents()
-      console.log(delta)
+      console.log('content: ', delta)
     },
     setContent () {
       this.quill.setContents([])
