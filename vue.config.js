@@ -1,6 +1,6 @@
 module.exports = {
-  publicPath: process.env.NODE_ENV === 'production'
-    ? '/vue-quill-drag-drop/'
-    : '/',
-  outputDir: 'docs'
+  // publicPath: process.env.NODE_ENV === 'production'
+  //   ? '/vue-quill-drag-drop/'
+  //   : '/',
+  // outputDir: 'docs'
 }
