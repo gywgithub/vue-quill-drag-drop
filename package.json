@@ -28,8 +28,15 @@
     "@vue/cli-service": "^3.0.5",
     "@vue/eslint-config-standard": "^4.0.0",
     "babel-eslint": "^10.0.1",
+    "cz-conventional-changelog": "^3.1.0",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0-0",
+    "minimist": "^1.2.5",
     "vue-template-compiler": "^2.5.17"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
