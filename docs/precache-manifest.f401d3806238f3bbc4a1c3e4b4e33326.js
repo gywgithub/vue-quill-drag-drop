@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "d163d082926311487a59",
+    "revision": "6368c8352cb63c239463",
     "url": "/vue-quill-drag-drop/css/app.805f821a.css"
   },
   {
-    "revision": "d163d082926311487a59",
-    "url": "/vue-quill-drag-drop/js/app.ef49a04a.js"
+    "revision": "6368c8352cb63c239463",
+    "url": "/vue-quill-drag-drop/js/app.77005aa5.js"
   },
   {
     "revision": "93176c0d2da5a409a269",
@@ -20,7 +20,7 @@ self.__precacheManifest = [
     "url": "/vue-quill-drag-drop/img/1.2cda4fd2.jpg"
   },
   {
-    "revision": "039c27b83f92a25ddb575dd89a6cbf24",
+    "revision": "c42df3386baa4aae6bd6188a9241c32e",
     "url": "/vue-quill-drag-drop/index.html"
   },
   {
