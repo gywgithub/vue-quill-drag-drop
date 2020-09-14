@@ -66,11 +66,9 @@
       <div class="div-size-right">
         <div class="quill-container">
           <quill-editor
+            ref="quillEditor"
             v-model="content"
             :options="editorOption"
-            @blur="onEditorBlur($event)"
-            @focus="onEditorFocus($event)"
-            @change="onEditorChange($event)"
             id="editor"
           ></quill-editor>
         </div>
@@ -91,14 +89,14 @@ export default {
     return {
       type: null,
       base64: null,
-      content: 'abc',
+      content: '',
       editorOption: {},
       dropData: 'text drop',
       quill: null,
       optionList: [
         {
           xAxis: {
-            data: ['abc', 'DEF', 'GHI', 'God', 'bbb', '111']
+            data: ['ABC', 'DEF', 'GHI', 'JKL', 'MN', 'OPQ']
           },
           yAxis: {},
           series: [{
@@ -108,12 +106,12 @@ export default {
         },
         {
           xAxis: {
-            data: ['God', '111']
+            data: ['God', 'ABC', 'DEF', 'HIJK', 'LM']
           },
           yAxis: {},
           series: [{
             type: 'line',
-            data: [10, 20]
+            data: [10, 20, 50, 80, 15]
           }]
         }
       ]
@@ -128,6 +126,7 @@ export default {
       e.setOption(this.optionList[key])
       e = null
     }
+
     Quill.register('modules/imageDrop', ImageDrop)
     this.quill = new Quill('#editor', { // eslint-disable-line
       theme: 'snow',
@@ -137,15 +136,20 @@ export default {
     })
     this.quill.root.addEventListener('drop', this.handleDrop, false)
     this.quill.root.addEventListener('dragover', this.handleDragover, false)
-    // function handler () {
-    //   console.log('text-change')
-    // }
-    // this.quill.on('text-change', handler)
+
+    // add change event
+    function handler () {
+      console.log('text-change')
+    }
+    this.quill.on('text-change', handler)
+
+    // clear contents
+    this.quill.setContents([])
+
+    // insert text
+    this.quill.insertText(0, 'Hello World', 'bold', true)
   },
   methods: {
-    onEditorBlur () {
-      console.log(1)
-    },
     dragend (event) {
       event.dataTransfer.clearData()
     },

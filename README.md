@@ -12,6 +12,10 @@ quill: `v1.3.6`
 
 quill-image-drop-module: `v1.0.3`
 
+#### Online Preview
+
+[https://gywgithub.github.io/vue-quill-drag-drop](https://gywgithub.github.io/vue-quill-drag-drop/#/)
+
 #### Preview
 
 ![drag-drop](src/assets/images/preview-quill.gif)
